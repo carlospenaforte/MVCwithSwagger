@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVCwithSwagger.Models;
 
 namespace MVCwithSwagger.Data
 {
@@ -8,6 +9,9 @@ namespace MVCwithSwagger.Data
         {
 
         }
+
+        public DbSet<AuthorModel> Authors { get; set; }
+        public DbSet<BookModel> Books { get; set; }
 
     }
 }
