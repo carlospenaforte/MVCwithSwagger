@@ -3,9 +3,9 @@ using MVCwithSwagger.Models;
 
 namespace MVCwithSwagger.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDBContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
 
         }
