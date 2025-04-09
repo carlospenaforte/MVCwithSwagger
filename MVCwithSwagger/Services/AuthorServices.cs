@@ -33,7 +33,7 @@ namespace MVCwithSwagger.Services
             }
         }
 
-        public async Task<ResponseModel<AuthorModel>> SearchAuthorId(int id)
+        public async Task<ResponseModel<AuthorModel>> SearchAuthorId(int idAuthor)
         {
             ResponseModel<AuthorModel> response = new ResponseModel<AuthorModel>();
             try
@@ -47,6 +47,7 @@ namespace MVCwithSwagger.Services
                 }
                 response.Data = author;
                 response.Message = "Author found";
+
                 return response;
             }
             catch (Exception ex)
