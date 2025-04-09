@@ -23,5 +23,12 @@ namespace MVCwithSwagger.Controllers
 
             return Ok(authors);
         }
+
+        [HttpGet("SearchAuthorId/{idAuthor}")]
+        public async Task<ActionResult<ResponseModel<AuthorModel>>> SearchAuthorId(int idAuthor)
+        {
+            var author = await _authorInterface.SearchAuthorId(idAuthor);
+            return Ok(author);
+        }
     }
 }
