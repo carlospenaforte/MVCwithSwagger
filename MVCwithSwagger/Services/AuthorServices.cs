@@ -59,9 +59,33 @@ namespace MVCwithSwagger.Services
             }
         }
 
-        public Task<ResponseModel<AuthorModel>> SearchAuthorIdBook(int idBook)
+        public async Task<ResponseModel<AuthorModel>> SearchAuthorIdBook(int idBook)
         {
-            throw new NotImplementedException();
+            ResponseModel<AuthorModel> response = new ResponseModel<AuthorModel>();
+            try
+            {
+                var book = await _context.Books
+                    .Include(a => a.Author)
+                    .FirstOrDefaultAsync(BookData => BookData.Id == idBook);
+
+                if (book == null)
+                {
+                    response.Message = "Author not found";
+                    return response;
+                }
+                response.Data = book.Author;
+                response.Message = "Author found";
+                return response;
+
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Status = false;
+
+                return response;
+            }
         }
     }
 }
