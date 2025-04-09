@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCwithSwagger.Data;
+using MVCwithSwagger.DTO;
 using MVCwithSwagger.Models;
 
 namespace MVCwithSwagger.Services
@@ -11,6 +12,35 @@ namespace MVCwithSwagger.Services
         public AuthorServices(AppDBContext context)
         {
             _context = context;
+        }
+
+        public async Task<ResponseModel<AuthorModel>> AddAuhor(AuthorCreationDto authorCreationDto)
+        {
+            ResponseModel<List<AuthorModel>> response = new ResponseModel<List<AuthorModel>>();
+
+            try
+            {
+                var author = new AuthorModel()
+                {
+                    Name = authorCreationDto.Name,
+                    Surname = authorCreationDto.Surname
+                };
+
+                _context.Add(author);
+                await _context.SaveChangesAsync();
+
+                response.Data =  await _context.Authors.ToListAsync();
+                response.Message = "Author added successfully";
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Status = false;
+                return response;
+            }
         }
 
         public async Task<ResponseModel<List<AuthorModel>>> ListofAuthors()
