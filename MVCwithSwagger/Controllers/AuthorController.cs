@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MVCwithSwagger.DTO;
 using MVCwithSwagger.Models;
 using MVCwithSwagger.Services;
 
@@ -36,6 +37,13 @@ namespace MVCwithSwagger.Controllers
         {
             var author = await _authorInterface.SearchAuthorIdBook(idBook);
             return Ok(author);
+        }
+
+        [HttpPost("AddAuthor")]
+        public async Task<ActionResult<ResponseModel<AuthorModel>>> AddAuthor(AuthorCreationDto authorCreationDto)
+        {
+            var authors = await _authorInterface.AddAuhor(authorCreationDto);
+            return Ok(authors);
         }
     }
 }

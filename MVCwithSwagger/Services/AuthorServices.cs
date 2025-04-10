@@ -39,6 +39,7 @@ namespace MVCwithSwagger.Services
             {
                 response.Message = ex.Message;
                 response.Status = false;
+
                 return response;
             }
         }
